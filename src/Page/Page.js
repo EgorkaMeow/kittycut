@@ -1,17 +1,13 @@
 import React from 'react';
 import './Page.css';
 
-import Header from '../Components/Header/Header';
-import Wrapper from '../Components/Wrapper/Wrapper';
-
-
-const Page = () => {
-    return (
-        <>
-            <Header />
-            <Wrapper is_page={true} />
-        </>
-    )
+class Page extends React.Component {
+    render(){
+        return (
+            <>
+            </>
+        )
+    }
 };
 
 export default Page;

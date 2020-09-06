@@ -1,17 +1,17 @@
 import React from 'react';
 import './Main.css';
 
-import Header from '../Components/Header/Header';
-import Wrapper from '../Components/Wrapper/Wrapper';
+import Form from '../Components/FormCut/FormCut';
 
 
-const Main = () => {
-    return (
-        <>
-            <Header />
-            <Wrapper is_page={false} />
-        </>
-    )
+class Main extends React.Component {
+    render () {
+        return (
+            <div className="container">
+                <Form />
+            </div>
+        )
+    }
 };
 
 export default Main;
