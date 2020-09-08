@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Main from './Main/Main';
+import Page from './Page/Page';
 import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
@@ -10,26 +11,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route exact path='/' component={Main} />
-        <Route path='/*' component={async () => {
-          const response = await fetch('/backend/index.php', {
-              method: 'POST',
-              mode: 'cors',
-              cache: 'no-cache',
-              body: {
-                  action: 'get_link',
-                  link: 'kittycut.tk' + window.location.pathname,
-              }
-          });
-
-          if(response !== "no"){
-            window.location.href = response;
-            return null;
-          }
-          else {
-            window.location.href = "/";
-            return null;
-          }
-        }} />
+        <Route path='/*' component={Page} />
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,

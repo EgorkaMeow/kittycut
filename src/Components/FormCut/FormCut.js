@@ -15,23 +15,32 @@ class FormCut extends React.Component {
         });
     }
 
-    createLink = async (e) => {
+    createLink = (e) => {
         e.preventDefault();
+        let form_data = new FormData();
+        form_data.append('action', 'create_link');
+        form_data.append('link', this.state.url);
+
         if(this.validateURL(this.state.url)){
-            const response = await fetch('/backend/index.php', {
+            fetch('http://localhost/backend/index.php', {
                 method: 'POST',
-                mode: 'cors',
-                cache: 'no-cache',
-                body: {
-                    action: 'create_link',
-                    link: this.state.url,
-                }
-            });
-            console.log(response);
-            this.setState({
-                show_cut_url: true,
-                cut_url: response,
+                body: form_data,
             })
+            .then(r => r.json())
+            .then((data) => {
+                if(data.status == 'ok'){
+                    this.setState({
+                        show_cut_url: true,
+                        cut_url: data.link,
+                    })
+                }
+                else {
+                    alert('Возникла ошибка, повторите заново!');
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
         }
         else {
             alert('Неправильный url!')

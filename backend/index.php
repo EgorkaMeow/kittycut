@@ -1,22 +1,33 @@
 <?php
-    $link = mysqli_connect("127.0.0.1", "cd97952_kittycut", "1q2w3e4r", "cd97952_kittycut");
+    header("Access-Control-Allow-Origin: *");
+    
+    $link = mysqli_connect("127.0.0.1", "egor", "egor", "kittycut");
 
-    if(isset($_POST['action']) && $_POST['action'] == 'create_link' && isset($_POST['link'])){
+    if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'create_link' && isset($_REQUEST['link'])){
         $cut_link = "kittycut.tk/" . create_cut_link();
-        mysqli_query($link, "INSERT INTO `links` (link, cut_link) VALUES ('" . $_POST['link'] . "', '" . $cut_link . "')");
-        echo $cut_link;
+        mysqli_query($link, "INSERT INTO `links` (link, cut_link) VALUES ('" . $_REQUEST['link'] . "', '" . $cut_link . "')");
+        echo json_encode([
+            'status' => 'ok',
+            'link' => $cut_link,
+        ]);
         exit;    
     }
 
-    if(isset($_POST['action']) && $_POST['action'] == 'get_link' && isset($_POST['link'])){
-        $result = mysqli_query($link, "SELECT link FROM `links` WHERE cut_link='" . $_POST['link'] . "'");
+    if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'get_link' && isset($_REQUEST['link'])){
+        $result = mysqli_query($link, "SELECT link FROM `links` WHERE cut_link='" . $_REQUEST['link'] . "'");
         if (mysqli_num_rows($result) > 0) {
             if($row = mysqli_fetch_assoc($result)){
-                echo $row['link'];
+                echo json_encode([
+                    'status' => 'ok',
+                    'link' => $row['link'],
+                ]);
                 exit; 
-            }   
+            } 
         }
-        echo "no";
+        echo json_encode([
+            'status' => 'error',
+            'link' => $row['link'],
+        ]);
         exit;
     }
 
