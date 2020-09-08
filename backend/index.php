@@ -1,7 +1,7 @@
 <?php
     header("Access-Control-Allow-Origin: *");
     
-    $link = mysqli_connect("127.0.0.1", "egor", "egor", "kittycut");
+    $link = mysqli_connect("127.0.0.1", "db_login", "db_password", "db_name");
 
     if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'create_link' && isset($_REQUEST['link'])){
         $cut_link = "kittycut.tk/" . create_cut_link();
