@@ -1,4 +1,4 @@
-#KittyCUT
+# KittyCUT
 
 A small application for minimizing links created with React.js and PHP
 
