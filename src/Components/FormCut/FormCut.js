@@ -22,7 +22,7 @@ class FormCut extends React.Component {
         form_data.append('link', this.state.url);
 
         if(this.validateURL(this.state.url)){
-            fetch('http://localhost/backend/index.php', {
+            fetch('./backend/index.php', {
                 method: 'POST',
                 body: form_data,
             })
