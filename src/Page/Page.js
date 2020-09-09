@@ -7,7 +7,7 @@ class Page extends React.Component {
         data.append('action', 'get_link');
         data.append('link', 'kittycut.tk' + window.location.pathname);
 
-        const response = await fetch('./backend/index.php', {
+        const response = await fetch('http://localhost/backend/index.php', {
             method: 'POST',
             body: data
         });
