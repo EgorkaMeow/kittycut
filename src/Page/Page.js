@@ -15,7 +15,7 @@ class Page extends React.Component {
         if(response.status == 200){
             let result = await response.json();
             if(result.status == 'ok'){
-                window.location.href = 'http://' + result.link;
+                window.location.href = result.link.indexOf('http://') === -1 ? (result.link.indexOf('https://') === -1 ? 'http://' + result.link : result.link) : result.link;
             }
             else {
                 window.location.href = "/";
